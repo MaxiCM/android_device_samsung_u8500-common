@@ -179,4 +179,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.ksm.default=1
 
 # Use the non-open-source parts, if they're present
-include vendor/samsung/u8500-common/vendor-common.mk
+include vendor/samsung/u8500/vendor-common.mk
