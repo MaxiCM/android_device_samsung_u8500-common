@@ -148,7 +148,7 @@ __BEGIN_DECLS
 #define AUDIO_OFFLOAD_CODEC_WMA_BIT_PER_SAMPLE "music_offload_wma_bit_per_sample"
 #define AUDIO_OFFLOAD_CODEC_WMA_CHANNEL_MASK "music_offload_wma_channel_mask"
 #define AUDIO_OFFLOAD_CODEC_WMA_ENCODE_OPTION "music_offload_wma_encode_option"
-#define AUDIO_OFFLOAD_CODEC_WMA_ENCODE_OPTION1"music_offload_wma_encode_option1"
+#define AUDIO_OFFLOAD_CODEC_WMA_ENCODE_OPTION1 "music_offload_wma_encode_option1"
 #define AUDIO_OFFLOAD_CODEC_WMA_ENCODE_OPTION2 "music_offload_wma_encode_option2"
 #define AUDIO_OFFLOAD_CODEC_FORMAT  "music_offload_codec_format"
 #define AUDIO_OFFLOAD_CODEC_FLAC_MIN_BLK_SIZE "music_offload_flac_min_blk_size"
@@ -757,10 +757,6 @@ struct audio_hw_device {
                                  const char *kv_pairs);
 #endif
 
-#ifdef MTK_HARDWARE
-    int (*SetAudioData)(struct audio_hw_device *dev,int par1,size_t len, void *ptr);
-    int (*GetAudioData)(struct audio_hw_device *dev,int par1,size_t len, void *ptr);
-#endif
 };
 typedef struct audio_hw_device audio_hw_device_t;
 
