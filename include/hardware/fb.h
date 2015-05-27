@@ -43,8 +43,8 @@ typedef struct framebuffer_device_t {
 
     /* dimensions of the framebuffer in pixels */
 #ifdef STE_HARDWARE
-    uint32_t  width;
-    uint32_t  height;
+    uint32_t        width;
+    uint32_t        height;
 #else
     const uint32_t  width;
     const uint32_t  height;
@@ -52,7 +52,7 @@ typedef struct framebuffer_device_t {
 
     /* frambuffer stride in pixels */
 #ifdef STE_HARDWARE
-    int       stride;
+    int             stride;
 #else
     const int       stride;
 #endif
@@ -62,8 +62,8 @@ typedef struct framebuffer_device_t {
 
     /* resolution of the framebuffer's display panel in pixel per inch*/
 #ifdef STE_HARDWARE
-    float     xdpi;
-    float     ydpi;
+    float           xdpi;
+    float           ydpi;
 #else
     const float     xdpi;
     const float     ydpi;

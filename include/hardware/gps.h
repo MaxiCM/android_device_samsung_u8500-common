@@ -251,10 +251,12 @@ typedef uint16_t AGpsStatusValue;
  */
 #define GPS_GEOFENCING_INTERFACE   "gps_geofencing"
 
+#ifdef STE_SAMSUNG_HARDWARE
 /**
  * The GPS chipset can use Psc for AGPS.
  */
 #define AGPS_USE_PSC
+#endif
 
 /** Represents a location. */
 typedef struct {
@@ -298,8 +300,10 @@ typedef struct {
     float   elevation;
     /** Azimuth of SV in degrees. */
     float   azimuth;
-	/** Unknown Samsung element. */
-	int     padding;
+#ifdef STE_SAMSUNG_HARDWARE
+    /** Unknown Samsung element. */
+    int     padding;
+#endif
 } GpsSvInfo;
 
 /** Represents SV status. */
@@ -961,3 +965,4 @@ typedef struct {
 __END_DECLS
 
 #endif /* ANDROID_INCLUDE_HARDWARE_GPS_H */
+
