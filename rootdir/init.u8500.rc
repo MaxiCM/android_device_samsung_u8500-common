@@ -234,8 +234,8 @@ on post-fs-data
     # Change permissions for modem_log_relay config file
     chmod 666 /modemfs/trace_auto.conf
     
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "smartassv2"
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "smartassv2"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/block/mmcblk0/queue/scheduler deadline
     write /sys/block/mmcblk1/queue/scheduler deadline
 
@@ -482,8 +482,8 @@ on property:sys.perf.profile=0
 
 # Balanced
 on property:sys.perf.profile=1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor smartassv2
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor smartassv2
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
 
 # High performance
 on property:sys.perf.profile=2
