@@ -154,7 +154,7 @@ TW_INCLUDE_JB_CRYPTO := true
 TW_CRYPTO_FS_TYPE := "ext4"
 TW_CRYPTO_REAL_BLKDEV := "/dev/block/mmcblk0p5"
 TW_CRYPTO_MNT_POINT := "/data"
-TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,noauto_da_alloc,journal_async_commit,errors=panic wait,check"
+TW_CRYPTO_FS_OPTIONS := "noatime,nosuid,nodev,discard,nodiratime,flush_merge,inline_xattr,noauto_da_alloc,journal_async_commit,errors=panic,background_gc=off,active_logs=2 wait,check"
 TW_CRYPTO_FS_FLAGS := "0x00000406"
 TW_CRYPTO_KEY_LOC := "/efs/metadata"
 TW_INCLUDE_FUSE_EXFAT := true
