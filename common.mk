@@ -92,12 +92,18 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb \
     persist.service.adb.enable=1
 
-# Charger
+# Prebuilt Charger
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/lpm.rc:root/lpm.rc
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
+    $(COMMON_PATH)/rootdir/lpm.rc:root/lpm.rc \
+    $(COMMON_PATH)/prebuilt/charger/charger:root/charger \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_0.png:root/res/images/charger/battery_0.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_1.png:root/res/images/charger/battery_1.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_2.png:root/res/images/charger/battery_2.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_3.png:root/res/images/charger/battery_3.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_4.png:root/res/images/charger/battery_4.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_5.png:root/res/images/charger/battery_5.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_charge.png:root/res/images/charger/battery_charge.png \
+    $(COMMON_PATH)/prebuilt/charger/images/battery_fail.png:root/res/images/charger/battery_fail.png
 
 # Misc Packages
 PRODUCT_PACKAGES += \
