@@ -22,7 +22,8 @@ PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # APN
-PRODUCT_COPY_FILES := $(COMMON_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
+PRODUCT_COPY_FILES += \
+     $(COMMON_PATH)/configs/apns-conf.xml:system/etc/apns-conf.xml
 
 # NovaThor Settings
 PRODUCT_PACKAGES += \
@@ -47,11 +48,12 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(COMMON_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
-# Wifi
+# Wi-Fi
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 PRODUCT_PACKAGES += \
-    libnetcmdiface
+    libnetcmdiface \
+    wpa_supplicant
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=150
@@ -118,10 +120,7 @@ PRODUCT_PACKAGES += \
 
 # F2FS
 PRODUCT_PACKAGES += \
-    genfstab \
-    mkfs.f2fs \
-    fsck.f2fs \
-    fibmap.f2fs
+    genfstab
 
 # Keylayout
 PRODUCT_COPY_FILES += \
@@ -154,6 +153,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
 
 # Live Wallpapers
