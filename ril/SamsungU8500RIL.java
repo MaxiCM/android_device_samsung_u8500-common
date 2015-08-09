@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 The CyanogenMod Project <http://www.cyanogenmod.org>
+ * Copyright (C) 2014 MaclawStudio
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,15 +50,15 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.PowerManager;
-import android.os.SystemProperties;
 import android.os.PowerManager.WakeLock;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SignalStrength;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.text.TextUtils;
+import android.telephony.TelephonyManager;
 import android.telephony.Rlog;
+import android.text.TextUtils;
 
 import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
 import com.android.internal.telephony.gsm.SuppServiceNotification;
@@ -74,7 +75,6 @@ import java.util.Collections;
 import java.util.Iterator;
 
 public class SamsungU8500RIL extends RIL implements CommandsInterface {
-
 
     //SAMSUNG STATES
     static final int RIL_REQUEST_GET_CELL_BROADCAST_CONFIG = 10002;
@@ -159,13 +159,19 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
     static final int RIL_UNSOL_UTS_GET_UNREAD_SMS_STATUS = 11031;
     static final int RIL_UNSOL_MIP_CONNECT_STATUS = 11032;
 
+    
     protected HandlerThread mSamsungu8500RILThread;
     protected ConnectivityHandler mSamsungu8500RILHandler;
-    private boolean mSignalbarCount = SystemProperties.getInt("ro.telephony.sends_barcount", 0) == 1 ? true : false;
-    private boolean mIsSamsungCdma = SystemProperties.getBoolean("ro.ril.samsung_cdma", false);
+    
+    private Message mPendingGetSimStatus;
 
     public SamsungU8500RIL(Context context, int networkMode, int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
+        mQANElements = 5;
+    }
+
+    public SamsungU8500RIL(Context context, int preferredNetworkType, int cdmaSubscription, Integer instanceId) {
+        super(context, preferredNetworkType, cdmaSubscription, instanceId);
         mQANElements = 5;
     }
 
@@ -177,15 +183,7 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
         }
     }
 
-    @Override
-    public void setCurrentPreferredNetworkType() {
-        if (RILJ_LOGD) riljLog("setCurrentPreferredNetworkType IGNORED");
-        /* Google added this as a fix for crespo loosing network type after
-         * taking an OTA. This messes up the data connection state for us
-         * due to the way we handle network type change (disable data
-         * then change then re-enable).
-         */
-    }
+
 
     private boolean NeedReconnect()
     {
@@ -277,11 +275,10 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             Rlog.d(RILJ_LOG_TAG, "Mobile Dataconnection is online setting it down");
             mDesiredNetworkType = networkType;
             mNetworktypeResponse = response;
-            ConnectivityManager cm =
-                (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            TelephonyManager tm = TelephonyManager.from(mContext);
             //start listening for the connectivity change broadcast
             startListening();
-            cm.setMobileDataEnabled(false);
+            tm.setDataEnabled(false);
         }
 
         @Override
@@ -289,11 +286,9 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             switch(msg.what) {
             //networktype was set, now we can enable the dataconnection again
             case MESSAGE_SET_PREFERRED_NETWORK_TYPE:
-                ConnectivityManager cm =
-                    (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-
+                TelephonyManager tm = TelephonyManager.from(mContext);
                 Rlog.d(RILJ_LOG_TAG, "preferred NetworkType set upping Mobile Dataconnection");
-                cm.setMobileDataEnabled(true);
+                tm.setDataEnabled(true);
                 //everything done now call back that we have set the networktype
                 AsyncResult.forMessage(mNetworktypeResponse, null, null);
                 mNetworktypeResponse.sendToTarget();
@@ -325,54 +320,6 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
                 }
             }
         }
-    }
-
-    @Override
-    protected RILRequest findAndRemoveRequestFromList(int serial) {
-        long removalTime = System.currentTimeMillis();
-        long timeDiff = 0;
-        RILRequest rr = null;
-
-        synchronized (mRequestList) {
-
-		rr = mRequestList.get(serial);
-
-                if (rr != null) {
-					mRequestList.remove(serial);
-                    return rr;
-                }
-                else
-                {
-                      // We need some special code here for the Samsung RIL,
-                      // which isn't responding to some requests.
-                      // We will print a list of such stale requests which
-                      // haven't yet received a response. If the timeout fires
-                      // first, then the wakelock is released without debugging.
-                    timeDiff = removalTime - rr.creationTime;
-                    if ( timeDiff > mWakeLockTimeout ) {
-                        Rlog.d(RILJ_LOG_TAG, "No response for [" + rr.mSerial + "] " +
-                                requestToString(rr.mRequest) + " after " + timeDiff + " milliseconds.");
-
-                        /* Don't actually remove anything for now. Consider uncommenting this to
-                           purge stale requests */
-
-                        /*
-                        itr.remove();
-                        if (mRequestMessagesWaiting > 0) {
-                            mRequestMessagesWaiting--;
-                        }
-
-                        // We don't handle the callback (ie. rr.mResult) for
-                        // RIL_REQUEST_SET_TTY_MODE, which is
-                        // RIL_REQUEST_QUERY_TTY_MODE. The reason for not doing
-                        // so is because it will also not get a response from the
-                        // Samsung RIL
-                        rr.release();
-                        */
-                    }
-                }
-            }
-        return null;
     }
 
     @Override
@@ -554,7 +501,7 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             rr.mResult.sendToTarget();
         }
 
-	return rr;
+    return rr;
    }
 
     @Override
@@ -855,20 +802,9 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
             response[i] = p.readInt();
         }
 
-        if (mIsSamsungCdma)
-            // Framework takes care of the rest for us.
-            return response;
-
         /* Matching Samsung signal strength to asu.
-		   Method taken from Samsungs cdma/gsmSignalStateTracker */
-        if(mSignalbarCount)
-        {
-            //Samsung sends the count of bars that should be displayed instead of
-            //a real signal strength
-            response[0] = ((response[0] & 0xFF00) >> 8) * 3; //gsmDbm
-        } else {
-            response[0] = response[0] & 0xFF; //gsmDbm
-        }
+           Method taken from Samsungs cdma/gsmSignalStateTracker */
+        response[0] = ((response[0] & 0xFF00) >> 8) * 3; //gsmDbm
         response[1] = -1; //gsmEcio
         response[2] = (response[2] < 0)?-120:-response[2]; //cdmaDbm
         response[3] = (response[3] < 0)?-160:-response[3]; //cdmaEcio
@@ -877,9 +813,9 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
         if(response[6] < 0 || response[6] > 8)
             response[6] = -1;
 
-	SignalStrength signalStrength = new SignalStrength(
-	            response[0], response[1], response[2], response[3], response[4],
-	            response[5], response[6], !mIsSamsungCdma);
+    SignalStrength signalStrength = new SignalStrength(
+                response[0], response[1], response[2], response[3], response[4],
+                response[5], response[6], true);
         return signalStrength;
     }
 
@@ -904,5 +840,30 @@ public class SamsungU8500RIL extends RIL implements CommandsInterface {
         if (RILJ_LOGD) riljLog(rr.serialString() + "> " + requestToString(rr.mRequest));
         Rlog.d(RILJ_LOG_TAG, "RIL_REQUEST_CDMA_GET_SUBSCRIPTION_SOURCE blocked!!!");
         //send(rr);
+    }
+
+    // Hack for Lollipop
+    // The system now queries for SIM status before radio on, resulting
+    // in getting an APPSTATE_DETECTED state. The RIL does not send an
+    // RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED message after the SIM is
+    // initialized, so delay the message until the radio is on.
+    @Override
+    public void
+    getIccCardStatus(Message result) {
+        if (mState != RadioState.RADIO_ON) {
+            mPendingGetSimStatus = result;
+        } else {
+            super.getIccCardStatus(result);
+        }
+    }
+
+    @Override
+    protected void switchToRadioState(RadioState newState) {
+        super.switchToRadioState(newState);
+
+        if (newState == RadioState.RADIO_ON && mPendingGetSimStatus != null) {
+            super.getIccCardStatus(mPendingGetSimStatus);
+            mPendingGetSimStatus = null;
+        }
     }
 }
