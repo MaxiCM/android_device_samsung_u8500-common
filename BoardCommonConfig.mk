@@ -117,8 +117,9 @@ BOARD_RECOVERY_SWIPE := true
 RECOVERY_VARIANT := twrp
 
 # SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/samsung/u8500-common/selinux
+BOARD_SEPOLICY_DIRS := \
+    $(BOARD_SEPOLICY_DIRS) \
+    device/samsung/u8500-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     device.te \
@@ -127,7 +128,6 @@ BOARD_SEPOLICY_UNION += \
     drmserver.te \
     ueventd.te \
     domain.te \
-    system.te \
     file_contexts \
     wpa_supplicant.te \
     vold.te
