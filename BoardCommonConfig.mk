@@ -17,7 +17,7 @@
 
 # Include headers
 TARGET_SPECIFIC_HEADER_PATH := device/samsung/u8500-common/include
-PRODUCT_VENDOR_KERNEL_HEADERS := device/samsung/u8500-common/include/kernel
+PRODUCT_VENDOR_KERNEL_HEADERS := device/samsung/u8500-common/kernel-headers
 
 # Board
 TARGET_NO_BOOTLOADER := true
