@@ -123,7 +123,10 @@ PRODUCT_PACKAGES += \
 
 # F2FS
 PRODUCT_PACKAGES += \
-    genfstab
+    genfstab \
+    mkfs.f2fs \
+    fsck.f2fs \
+    fibmap.f2fs
 
 # Keylayout
 PRODUCT_COPY_FILES += \
