@@ -15,7 +15,9 @@
 #
 COMMON_PATH := device/samsung/u8500-common
 
-DEVICE_PACKAGE_OVERLAYS := $(COMMON_PATH)/overlay
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+     $(COMMON_PATH)/overlay
 
 # Our devices are HDPI
 PRODUCT_AAPT_CONFIG := normal hdpi
@@ -49,17 +51,15 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Wi-Fi
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     wpa_supplicant \
     libwpa_client \
     hostapd \
-    dhcpcd.conf
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=150
+    dhcpcd.conf \
+    wpa_supplicant.conf
+
+# Wi-Fi firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
 # Bluetooth
@@ -83,6 +83,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
     $(COMMON_PATH)/configs/asound.conf:system/etc/asound.conf
+
 PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.a2dp.default \
@@ -99,7 +100,6 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Prebuilt Charger
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/lpm.rc:root/lpm.rc \
     $(COMMON_PATH)/prebuilt/charger/charger:root/charger \
     $(COMMON_PATH)/prebuilt/charger/images/battery_0.png:root/res/images/charger/battery_0.png \
     $(COMMON_PATH)/prebuilt/charger/images/battery_1.png:root/res/images/charger/battery_1.png \
@@ -188,11 +188,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=48m \
     dalvik.vm.heapsize=128m \
     dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=512k \
+    dalvik.vm.heapminfree=1m \
     dalvik.vm.heapmaxfree=4m
-PRODUCT_TAGS += dalvik.gc.type-precise
 
-#ART
+# ART
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-flags=--no-watch-dog 
 
