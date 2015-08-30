@@ -56,8 +56,14 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     libwpa_client \
     hostapd \
-    dhcpcd.conf \
-    wpa_supplicant.conf
+    dhcpcd.conf
+    
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=150
+    
+PRODUCT_COPY_FILES += \		
+    $(COMMON_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # Wi-Fi firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
@@ -113,8 +119,7 @@ PRODUCT_COPY_FILES += \
 # Misc Packages
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
-    SamsungServiceMode \
-    Torch
+    SamsungServiceMode
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
