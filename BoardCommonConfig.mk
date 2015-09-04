@@ -133,7 +133,6 @@ BOARD_SEPOLICY_UNION += \
     drmserver.te \
     ueventd.te \
     domain.te \
-    system.te \
     file_contexts \
     wpa_supplicant.te \
     vold.te
