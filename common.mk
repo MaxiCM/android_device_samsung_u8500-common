@@ -96,6 +96,9 @@ PRODUCT_PACKAGES += \
     libaudioutils \
     libtinyalsa
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    audio.offload.disable=1
+
 # U8500 Hardware
 $(call inherit-product, hardware/u8500/u8500.mk)
 
