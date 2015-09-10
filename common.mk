@@ -54,8 +54,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libnetcmdiface \
     wpa_supplicant \
+    wpa_supplicant.conf \
     libwpa_client \
     hostapd \
+    hostapd_default.conf \
     dhcpcd.conf
     
 PRODUCT_PROPERTY_OVERRIDES += \
