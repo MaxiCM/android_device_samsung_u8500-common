@@ -50,6 +50,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
     $(COMMON_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
+# Camera API 1.0
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
 # Wi-Fi
 PRODUCT_PACKAGES += \
     libnetcmdiface \
@@ -103,11 +107,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # U8500 Hardware
 $(call inherit-product, hardware/u8500/u8500.mk)
-
-# USB
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb \
-    persist.service.adb.enable=1
 
 # Prebuilt Charger
 PRODUCT_COPY_FILES += \
@@ -209,8 +208,26 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=8
 
 # ART
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    dalvik.vm.dex2oat-Xms=64m \
+    dalvik.vm.dex2oat-Xmx=512m \
+    dalvik.vm.image-dex2oat-Xms=64m \
+    dalvik.vm.image-dex2oat-Xmx=64m \
+    ro.dalvik.vm.native.bridge=0 \
+    dalvik.vm.image-dex2oat-filter=speed \
+    dalvik.vm.dex2oat-filter=interpret-only
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     dalvik.vm.dex2oat-flags=--no-watch-dog 
+
+# Root and USB
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=1 \
+    ro.secure=1 \
+    ro.allow.mock.location=0 \
+    ro.debuggable=1 \
+    ro.zygote=zygote32 \
+    persist.sys.usb.config=mtp
 
 # KSM
 PRODUCT_PROPERTY_OVERRIDES += \
