@@ -208,6 +208,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=8
 
 # ART
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-flags=--no-watch-dog 
+
 ADDITIONAL_DEFAULT_PROPERTIES += \
     dalvik.vm.dex2oat-Xms=64m \
     dalvik.vm.dex2oat-Xmx=512m \
@@ -216,9 +219,6 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     ro.dalvik.vm.native.bridge=0 \
     dalvik.vm.image-dex2oat-filter=speed \
     dalvik.vm.dex2oat-filter=interpret-only
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-flags=--no-watch-dog 
 
 # Root and USB
 ADDITIONAL_DEFAULT_PROPERTIES += \
