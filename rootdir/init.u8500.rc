@@ -162,10 +162,6 @@ on post-fs
     write /sys/class/power_supply/battery/batt_reinit_capacity 1
     insmod /system/lib/modules/bthid.ko
 
-    # Loading exFAT-fs drivers
-    insmod /system/lib/modules/exfat_core.ko
-    insmod /system/lib/modules/exfat_fs.ko
-
 on post-fs-data
 
     # EFS wifi permissions
