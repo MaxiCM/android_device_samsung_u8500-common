@@ -2,6 +2,7 @@
 /dev/mali                   u:object_r:gpu_device:s0
 /dev/ump                    u:object_r:gpu_device:s0
 /dev/b2r2_blt               u:object_r:gpu_device:s0
+/dev/hwmem                  u:object_r:graphics_device:s0
 /dev/disp0                  u:object_r:graphics_device:s0
 /dev/comp0                  u:object_r:graphics_device:s0
 
@@ -10,7 +11,6 @@
 /modemfs(/.*)?              u:object_r:radio_data_file:s0
 
 /efs/wifi(/.*)?             u:object_r:wifi_data_file:s0
-/dev/block/mmcblk0p7        u:object_r:efs_block_device:s0
 
 # Bluetooth
 /dev/ttyAMA0                u:object_r:hci_attach_dev:s0
@@ -32,10 +32,3 @@
 
 /dev/tee                    u:object_r:tee_device:s0
 /dev/pipes                  u:object_r:socket_device:s0
-
-# For wpa_supp
-/dev/rfkill                 u:object_r:rfkill_device:s0
-
-# Firmwares
-/system/vendor/firmware/fw_bcmdhd.bin               u:object_r:firmware_wlan:s0
-/system/vendor/firmware/fw_bcmdhd_apsta.bin         u:object_r:firmware_wlan:s0
