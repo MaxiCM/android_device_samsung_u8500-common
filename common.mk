@@ -196,7 +196,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapsize=128m \
     dalvik.vm.heaptargetutilization=0.75 \
     dalvik.vm.heapminfree=1m \
-    dalvik.vm.heapmaxfree=4m
+    dalvik.vm.heapmaxfree=4m \
+    persist.sys.dalvik.multithread=true
 
 # HWUI tweaks
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -218,12 +219,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.image-dex2oat-Xmx=64m \
     ro.dalvik.vm.native.bridge=0
 
-# Root and USB
+# USB
 ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=1 \
-    ro.secure=1 \
-    ro.allow.mock.location=0 \
-    ro.debuggable=1 \
     ro.zygote=zygote32 \
     persist.sys.usb.config=mtp
 
