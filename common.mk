@@ -110,7 +110,7 @@ $(call inherit-product, hardware/u8500/u8500.mk)
 
 # Prebuilt Charger
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/prebuilt/charger/charger:root/charger \
+    $(COMMON_PATH)/prebuilt/charger/charger:root/sbin/charger \
     $(COMMON_PATH)/prebuilt/charger/images/battery_0.png:root/res/images/charger/battery_0.png \
     $(COMMON_PATH)/prebuilt/charger/images/battery_1.png:root/res/images/charger/battery_1.png \
     $(COMMON_PATH)/prebuilt/charger/images/battery_2.png:root/res/images/charger/battery_2.png \
