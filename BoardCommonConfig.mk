@@ -104,6 +104,15 @@ USE_LEGACY_AUDIO_POLICY := 1
 # Enable WEBGL in WebKit
 ENABLE_WEBGL := true
 
+# SkTextBox for libtvout
+BOARD_USES_SKTEXTBOX := true
+
+# Dex Pre-opt
+WITH_DEXPREOPT := true
+
+# CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
+
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 25
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
