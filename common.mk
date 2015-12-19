@@ -56,20 +56,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
-    libnetcmdiface \
-    wpa_supplicant \
-    wpa_supplicant.conf \
     libwpa_client \
     hostapd \
-    hostapd_default.conf \
-    dhcpcd.conf
+    dhcpcd.conf \
+    wpa_supplicant \
+    wpa_supplicant.conf
     
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=150
-    
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+    wifi.supplicant_scan_interval=150 \
+    net.tethering.noprovisioning=true
 
 # Wi-Fi firmware
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
