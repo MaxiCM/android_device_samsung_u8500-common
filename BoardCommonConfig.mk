@@ -107,9 +107,6 @@ ENABLE_WEBGL := true
 # SkTextBox for libtvout
 BOARD_USES_SKTEXTBOX := true
 
-# Dex Pre-opt
-WITH_DEXPREOPT := true
-
 # CM PowerHAL
 TARGET_USES_CM_POWERHAL := true
 
