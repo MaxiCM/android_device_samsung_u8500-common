@@ -162,6 +162,9 @@ on post-fs
     write /sys/class/power_supply/battery/batt_reinit_capacity 1
     insmod /system/lib/modules/bthid.ko
 
+    # Frandom Module support
+    insmod /system/lib/modules/frandom.ko
+
 on post-fs-data
 
     # EFS wifi permissions
