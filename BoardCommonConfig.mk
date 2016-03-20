@@ -145,6 +145,7 @@ BOARD_SEPOLICY_UNION += \
     init_shell.te \
     isolated_app.te \
     mediaserver.te \
+    orientationd.te \
     platform_app.te \
     radio.te \
     rild.te \
