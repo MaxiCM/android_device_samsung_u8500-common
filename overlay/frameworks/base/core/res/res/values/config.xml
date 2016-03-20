@@ -214,4 +214,13 @@
         <item>"evdo:4094,87380,262144,4096,16384,262144"</item>
     </string-array>
 
+     <!-- If there is no sysfs-based control mechanism, enable this -->
+     <bool name="useCameraInterface">false</bool>
+ 
+     <!-- Full path to the sysfs toggle -->
+     <string name="flashDevice">/sys/class/sec/flash/enable</string>
+ 
+     <!-- On setting -->
+     <integer name="valueOn">1</integer>
+
 </resources>
