@@ -59,6 +59,7 @@ BOARD_CUSTOM_BOOTIMG_MK := device/samsung/u8500-common/shbootimg.mk
 BOARD_CANT_BUILD_RECOVERY_FROM_BOOT_PATCH := true
 
 # Graphics
+MALLOC_IMPL := dlmalloc
 BOARD_EGL_NEEDS_FNW := true
 USE_OPENGL_RENDERER := true
 HWUI_COMPILE_FOR_PERF := true
