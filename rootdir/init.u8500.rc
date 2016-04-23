@@ -272,6 +272,15 @@ on boot
     chown root system /sys/class/sec/gps/GPS_nRST/value
     chmod 0664 /sys/class/sec/gps/GPS_nRST/value
 
+    # Permission for cpufreq Performance Control
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
+
     # Permissions for bluetooth
     # UART device
     chown bluetooth net_bt_stack /dev/ttyAMA0
