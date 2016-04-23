@@ -1,2 +1,0 @@
-allow vold rootfs:dir { open create read write getattr add_name remove_name };
-allow vold kernel:system { module_request };

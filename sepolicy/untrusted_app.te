@@ -1,2 +1,0 @@
-allow untrusted_app init:unix_dgram_socket { write };
-allow untrusted_app init_tmpfs:file { open read };

@@ -1,2 +1,0 @@
-allow isolated_app init_tmpfs:file { read };
-allow isolated_app init:unix_dgram_socket { write };

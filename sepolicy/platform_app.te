@@ -1,4 +1,0 @@
-allow platform_app graphics_device:chr_file { open getattr read write ioctl };
-allow platform_app init:unix_dgram_socket { write };
-allow platform_app init_tmpfs:file { open read };
-

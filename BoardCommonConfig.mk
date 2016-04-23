@@ -132,32 +132,6 @@ BOARD_SUPPRESS_EMMC_WIPE := true
 BOARD_RECOVERY_SWIPE := true
 RECOVERY_VARIANT := twrp
 
-# SELinux
-BOARD_SEPOLICY_DIRS := \
-    $(BOARD_SEPOLICY_DIRS) \
-    device/samsung/u8500-common/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    admsrv.te \
-    bluetooth.te \
-    init.te \
-    init_shell.te \
-    isolated_app.te \
-    mediaserver.te \
-    orientationd.te \
-    platform_app.te \
-    radio.te \
-    rild.te \
-    shared_relro.te \
-    surfaceflinger.te \
-    system_app.te \
-    system_server.te \
-    untrusted_app.te \
-    vold.te \
-    wpa.te \
-    zygote.te
-
 # Delete the line below when SELinux is enabled on all devices
 COMMON_GLOBAL_CFLAGS += -DRECOVERY_CANT_USE_CONFIG_EXT4_FS_XATTR
 

@@ -1,4 +1,0 @@
-allow wpa unlabeled:dir { search };
-allow wpa unlabeled:file { open read getattr };
-allow wpa efs_file:dir { read search setattr add_name remove_name write };
-allow wpa efs_file:file { open read write getattr setattr };

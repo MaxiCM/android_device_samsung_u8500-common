@@ -1,2 +1,0 @@
-allow surfaceflinger surfaceflinger:process { execmem };
-allow surfaceflinger cpuctl_device:dir { search };

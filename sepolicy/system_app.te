@@ -1,6 +1,0 @@
-allow system_app graphics_device:chr_file { open getattr read write ioctl };
-allow system_app shell_data_file:dir { search };
-allow system_app sysfs_writable:file { open read write };
-allow system_app init:unix_dgram_socket { write };
-allow system_app init_tmpfs:file { open read };
-

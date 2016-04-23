@@ -1,7 +1,0 @@
-allow bluetooth unlabeled:dir { search };
-allow bluetooth unlabeled:file { open read getattr };
-allow bluetooth sysfs:file { write };
-allow bluetooth admsrv_tmpfs:file { unlink };
-allow bluetooth admsrv:fd { use };
-allow bluetooth graphics_device:chr_file { open read write getattr ioctl };
-
