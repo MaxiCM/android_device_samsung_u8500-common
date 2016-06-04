@@ -218,4 +218,4 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mtp
 
 # Use the non-open-source parts, if they're present
-include vendor/samsung/janice/vendor-common.mk
+$(call inherit-product, vendor/samsung/janice/vendor-common.mk)
