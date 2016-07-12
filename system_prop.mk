@@ -8,6 +8,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.zygote.disable_gl_preload=1 \
     ro.bq.gpu_to_cpu_unsupported=1 \
     debug.sf.hw=1 \
+    debug.egl.recordable.rgba8888=1 \
     debug.hwui.render_dirty_regions=false
 
 # Media
