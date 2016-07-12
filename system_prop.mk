@@ -40,7 +40,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Memory management
 PRODUCT_PROPERTY_OVERRIDES += \
-    config.disable_atlas=true
+    config.disable_atlas=true \
+    ro.config.max_starting_bg=6 \
+    ro.sys.fw.bg_apps_limit=8
 
 # Storage switch
  PRODUCT_PROPERTY_OVERRIDES += \
