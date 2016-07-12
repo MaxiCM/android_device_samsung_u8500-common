@@ -38,6 +38,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
 
+# Memory management
+PRODUCT_PROPERTY_OVERRIDES += \
+    config.disable_atlas=true
+
 # Storage switch
  PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.vold.switchablepair=sdcard0,sdcard1
