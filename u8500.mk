@@ -28,8 +28,8 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 -include $(COMMON_PATH)/system_prop.mk
 
 # NovaThor Settings
-PRODUCT_PACKAGES += \
-    NovaThorSettings
+#PRODUCT_PACKAGES += \
+#    NovaThorSettings
 
 # U8500 Common init
 PRODUCT_COPY_FILES += \
