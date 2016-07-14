@@ -13,6 +13,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
+    ste.use_google_h264_encoder=true \
     persist.sys.media.use-awesome=true \
     audio.offload.disable=true
 
