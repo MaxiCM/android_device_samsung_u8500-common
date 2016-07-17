@@ -1,4 +1,13 @@
-CyanogenMod 12.1
+android_device_samsung_u8500-common
 ===================================
 
 Common Files for Samsung's NovaThor U8500 based devices (Galaxy S Advance, Galaxy Ace 2 and Galaxy Beam)
+
+Thanks to:
+- Team Canjica
+- ChronoMonoChrome
+- SergeyL
+- nieltg
+- Jtfk
+- XperiaSTE Team
+- MaxiCM Team
